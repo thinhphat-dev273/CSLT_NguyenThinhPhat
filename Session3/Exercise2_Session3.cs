@@ -407,10 +407,52 @@ class Program
         Console.ReadLine();
 
     }
+    static void Bai8()
+    {
+       
+        string systemOTP = "839201";
+        DateTime creationTime = DateTime.Now;
 
+       Console.WriteLine("---INPUT---");
+       Console.WriteLine("Mã OTP nhận được: ");
+       string inputOTP = Console.ReadLine()?.Trim() ?? " ";
+
+       Console.Write("Thời gian trôi qua: ");
+       if(!int.TryParse(Console.ReadLine(), out int secondPassed) || secondPassed < 0)
+        {
+            Console.WriteLine("Trạng thái xác thực: LỖI - Thời gian giả lập không hợp lệ.");
+            return;
+        }
+
+        DateTime verifyTime = creationTime.AddSeconds(secondPassed);
+        TimeSpan duration = verifyTime - creadtionTime;
+
+        Console.WriteLine("---OUTPUT---");
+
+        bool isValidFormat = inputOTP.Length == 6 && ulong.TryParse(inputOTP, out _);
+        if (!isValidFormat)
+        {
+            Console.WriteLine("Trạng thái xác thực: LỖI - Định dạng không hợp lệ (phải chứa đúng 6 chữ số).");
+            return;
+        }
+
+        if (duration.TotalSeconds > 300)
+        {
+            Console.WriteLine($"Trạng thái xác thực: LỖI - Hết hạn OTP (Đã trôi qua {duration.Minutes} phút {duration.Seconds} giây).");
+            return;
+        }
+
+        if (inputOtp != systemOtp)
+        {
+            Console.WriteLine("Trạng thái xác thực: LỖI - Mã sai.");
+            return;
+        }
+        Console.WriteLine("Trạng thái xác thực: THÀNH CÔNG - Giao dịch đã được phê duyệt.");
+    
+    }
     static void Main()
     {
-        Bai7();
+        Bai8();
     }
 }
 
