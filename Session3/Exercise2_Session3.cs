@@ -414,7 +414,7 @@ class Program
         DateTime creationTime = DateTime.Now;
 
        Console.WriteLine("---INPUT---");
-       Console.WriteLine("Mã OTP nhận được: ");
+       Console.Write("Mã OTP nhận được: ");
        string inputOTP = Console.ReadLine()?.Trim() ?? " ";
 
        Console.Write("Thời gian trôi qua: ");
@@ -425,7 +425,7 @@ class Program
         }
 
         DateTime verifyTime = creationTime.AddSeconds(secondPassed);
-        TimeSpan duration = verifyTime - creadtionTime;
+        TimeSpan duration = verifyTime - creationTime;
 
         Console.WriteLine("---OUTPUT---");
 
@@ -442,7 +442,7 @@ class Program
             return;
         }
 
-        if (inputOtp != systemOtp)
+        if (inputOTP != systemOTP)
         {
             Console.WriteLine("Trạng thái xác thực: LỖI - Mã sai.");
             return;
@@ -450,9 +450,108 @@ class Program
         Console.WriteLine("Trạng thái xác thực: THÀNH CÔNG - Giao dịch đã được phê duyệt.");
     
     }
+    //Máy Tính Lương Gross - Net & Thuế TNCN Nhân Viên
+    static void Bai9()
+    {
+        decimal luongGross;
+        int soNguoiPhuThuoc;
+        Console.WriteLine("---INPUT---");
+        Console.Write("Lương Gross: ");
+        decimal.TryParse(Console.ReadLine(), out luongGross);
+        Console.Write("Số người phụ thuộc: ");
+        int.TryParse(Console.ReadLine(), out soNguoiPhuThuoc);
+
+        //const float BHXH = 0.08f * luongGross;
+        //const float BHYT = 0.15f * luongGross;
+        //const float BHTN = 0.01f * luongGross;
+        decimal thueThuNhapCaNhan;
+        const int mucBanThan = 11000000;
+        decimal tong = 0.105m * luongGross;
+        decimal thuNhapChiuThue = luongGross - tong - mucBanThan - (soNguoiPhuThuoc * 4400000);
+
+        if(thuNhapChiuThue <= 0)
+        {
+            thuNhapChiuThue = 0;
+        }
+
+        if(thuNhapChiuThue > 0 && thuNhapChiuThue <= 5000000)
+        {
+            thueThuNhapCaNhan = 0.05m * thuNhapChiuThue;
+
+        }
+        else if(thuNhapChiuThue <= 10000000)
+        {
+            thueThuNhapCaNhan = (0.05m * 5000000) + (0.1m * (thuNhapChiuThue - 5000000));
+
+        }
+        else if(thuNhapChiuThue <= 18000000)
+        {
+            thueThuNhapCaNhan = (0.05m * 5000000) + (0.1m * 5000000) + (0.15m * (thuNhapChiuThue - 10000000));
+        }
+
+        else
+        {
+            thueThuNhapCaNhan = 0;
+        }
+        decimal luongNet = luongGross - tong - thueThuNhapCaNhan;
+        Console.WriteLine("---OUTPUT");
+        Console.WriteLine($"Giảm trừ Bảo hiểm (10.5%): {tong:N0} VNĐ");
+        Console.WriteLine($"Thu nhập chịu thuế: {thuNhapChiuThue:N0} VNĐ"); 
+        Console.WriteLine($"Thuế TNCN phải nộp: {thueThuNhapCaNhan:N0} VNĐ");
+        Console.WriteLine($"Lương NET thực nhận: {luongNet:N0} VNĐ");
+
+    }
+    //Quản Lý Tồn Kho & Xử Lý Giá Trị Khuyết Thiếu (Nullable Types)
+   enum StockStatus
+{
+    OutOfStock,
+    LowStock,
+    InStock,
+    Discontinued
+}
+    static void Bai10()
+    {
+        string productId = "KB-09";
+        string productName = "Bàn phím Cơ Akko";
+        int? quantity = null;            
+        int minThreshold = 10;            
+        DateTime? restockDate = null;    
+
+        
+        int displayQuantity = quantity ?? 0;
+
+        
+        StockStatus status;
+        if (quantity == null || quantity == 0)
+        {
+            status = StockStatus.OutOfStock;
+        }
+        else if (quantity < minThreshold)
+        {
+            status = StockStatus.LowStock;
+        }
+        else
+        {
+            status = StockStatus.InStock;
+        }
+
+        
+        string restockText = restockDate?.ToString("dd/MM/yyyy") ?? "Chưa có lịch nhập";
+
+    
+        Console.WriteLine("---INPUT---");
+        Console.WriteLine($"Sản phẩm: {productName} (Mã: {productId})");
+        Console.WriteLine($"Số lượng tồn kho: {(quantity.HasValue ? quantity.Value.ToString() : "null (Chưa kiểm kê)")}");
+        Console.WriteLine($"Restock Date: {(restockDate.HasValue ? restockDate.Value.ToString("dd/MM/yyyy") : "null")}");
+
+        Console.WriteLine("--- OUTPUT ---");
+        Console.WriteLine($"Số lượng hiển thị: {displayQuantity} {(quantity == null ? "(Cảnh báo: Dữ liệu trống)" : "")}");
+        Console.WriteLine($"Trạng thái kho: {status} (Hết hàng)");
+        Console.WriteLine($"Dự kiến nhập hàng: {restockText}");
+    }
     static void Main()
     {
-        Bai8();
+        Bai10();
     }
 }
 
