@@ -536,7 +536,7 @@ class Program
         }
 
         
-        string restockText = restockDate?.ToString("dd/MM/yyyy") ?? "Chưa có lịch nhập";
+        string restockText = restockDate?.ToString("dd/MM/yyyy") ?? "Chưa có lịch nhập hàng";
 
     
         Console.WriteLine("---INPUT---");
@@ -549,9 +549,55 @@ class Program
         Console.WriteLine($"Trạng thái kho: {status} (Hết hàng)");
         Console.WriteLine($"Dự kiến nhập hàng: {restockText}");
     }
+    static void Bai11()
+    {
+        Console.WriteLine("---INPUT---");
+        decimal tienGuiBanDau;
+        Console.Write("Số tiền gửi: ");
+        decimal.TryParse(Console.ReadLine(), out tienGuiBanDau);
+
+        double laiSuatNam;
+        Console.Write("Lãi suất năm: ");
+        double.TryParse(Console.ReadLine(), out laiSuatNam);
+
+        int kyHan;
+        Console.Write("Thời gian gửi: ");
+        int.TryParse(Console.ReadLine(), out kyHan);
+
+        decimal laiDon = tienGuiBanDau * ((decimal)laiSuatNam / 100m) *(kyHan / 12m);
+        double coSo = 1.0 + (laiSuatNam / 100.0) / 12.0;
+        decimal tongTienA = (decimal)((double)tienGuiBanDau * Math.Pow(coSo, kyHan));
+        decimal chenhLech;
+        string toiUu;
+        decimal laiKep = tongTienA - tienGuiBanDau;
+
+        if(laiDon > laiKep)
+        {
+            chenhLech = laiDon - laiKep;
+           toiUu= "(Lãi đơn tối ưu hơn)";
+        } else if(laiDon < laiKep)
+        {
+            chenhLech = laiKep - laiDon;
+             toiUu= "(Lãi kép tối ưu hơn)";
+        }
+        else
+        {
+            chenhLech = 0;
+             toiUu= "(Không lãi suất nào tối ưu hơn)";
+        } 
+
+        Console.WriteLine("--- OUTPUT ---");
+        Console.WriteLine($"Tổng tiền lãi (lãi đơn): {laiDon:N0} VNĐ");
+        Console.WriteLine($"Tổng tiền lãi (Lãi kép): {laiKep:N0} VNĐ");
+        Console.WriteLine($"Lợi nhuận chênh lệch: {chenhLech:N0} VNĐ {toiUu}");
+
+
+
+
+    }
     static void Main()
     {
-        Bai10();
+        Bai11();
     }
 }
 
