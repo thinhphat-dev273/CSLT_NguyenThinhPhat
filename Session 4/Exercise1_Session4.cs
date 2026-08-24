@@ -32,10 +32,12 @@ class Program
         if(a > b && a > c)
         {
             Console.WriteLine($"{a} là số lớn nhất trong 3 số");
-        } else if(b > a && b > c)
+        } 
+        else if(b > a && b > c)
         {
             Console.WriteLine($"{b} là số lớn nhất trong 3 số");
-        }else if(c > b && c > a)
+        }
+        else if(c > b && c > a)
         {
             Console.WriteLine($"{c} là số lớn nhất trong 3 số");
         }
@@ -99,10 +101,12 @@ class Program
         if(a == b || a == c || b == c)
         {
             Console.WriteLine("Đây là tam giác cân");
-        } else if (a==b && a == c && b == c)
+        } 
+        else if (a==b && a == c && b == c)
         {
             Console.WriteLine("Đây là tam giác đều");
-        } else
+        } 
+        else
         {
             Console.WriteLine("Đây là tam giác thường");
         }
@@ -150,14 +154,14 @@ class Program
     static void Bai7()
     {
         int n = 4; 
-    for (int i = 1; i <= n; i++)
-    {
-        for (int j = 1; j <= i; j++)
+        for (int i = 1; i <= n; i++)
         {
-            Console.Write(j);
+            for (int j = 1; j <= i; j++)
+            {
+                Console.Write(j);
+            }
+            Console.WriteLine();
         }
-        Console.WriteLine();
-    }
     }
     static void Bai8()
     {
@@ -173,6 +177,27 @@ class Program
     }
     static void Bai9()
     {
+        int a,b;
+        Console.Write("Nhập khoảng cách a: ");
+        a = int.Parse(Console.ReadLine());
+        Console.Write("Nhập khoảng cách b: ");
+        b = int.Parse(Console.ReadLine());
+
+        for(int n = a; n <= b; n++)
+        {
+            int tong = 0;
+            for(int i =1; i < n; i++)
+            {
+                if (n% i == 0)
+                {
+                    tong += i;
+                }
+            }
+            if(tong == n)
+            {
+                Console.WriteLine($"{n} là số hoàn hảo trong khoảng {a} và {b} ");
+            }
+        }
     }
     static void Bai10()
     {
@@ -180,33 +205,33 @@ class Program
         Console.Write("Nhập vào một số lớn hơn 1: ");
         while (true)
         {
-        if(int.TryParse(Console.ReadLine(), out n) && n > 1)
-        {
-            break;
-        } Console.WriteLine("Vui lòng nhập số lớn hơn 1");
-    }
+            if(int.TryParse(Console.ReadLine(), out n) && n > 1)
+            {
+                break;
+            } Console.WriteLine("Vui lòng nhập số lớn hơn 1");
+        }
     bool isPrime = true;
 
-    for (int i = 2; i * i <= n; i++)
-    {
-        if (n % i == 0)
-    {
-        isPrime = false;
-        break;
-    }
-    }
+        for (int i = 2; i * i <= n; i++)
+        {
+                if (n % i == 0)
+            {
+                isPrime = false;
+                break;
+            }
+        }
 
-    if (isPrime && n > 1)
-    {
-    Console.WriteLine($"{n} là số nguyên tố");
-    }
-    else
-    {
-    Console.WriteLine($"{n} không phải số nguyên tố");
-    }  
+        if (isPrime && n > 1)
+        {
+            Console.WriteLine($"{n} là số nguyên tố");
+        }
+         else
+        {
+            Console.WriteLine($"{n} không phải số nguyên tố");
+        }  
     }  
     static void Main()
     {
-        Bai10();
+        Bai9();
     }
 }
