@@ -664,36 +664,65 @@ class Program
         }
         Console.WriteLine($"TỔNG PHÍ ĐỖ XE: {tongPhi:N0} VNĐ");
     }
+    static void Bai14()
+    {
+        
+    }
     static void Bai15()
     {
         Console.Write("Khách hàng: ");
-        string loaiKH = Console.ReadLine().Trim().ToLower();
-        Console.Write("Thẻ SV hợp lệ: ");
-        string theSV = Console.ReadLine().Trim().ToLower();
+        string loaiKH = Console.ReadLine().Trim().ToLower() ?? " ";
+        string theSV = "";
         while (true)
         {
-            if(theSV == "true" || theSV == "false")
+            Console.Write("Thẻ SV hợp lệ (true/false): ");
+            theSV = (Console.ReadLine() ?? "").Trim().ToLower();
+
+            if (theSV == "true" || theSV == "false")
             {
                 break;
             }
-             Console.WriteLine("Trạng thái thể sinh viên không hợp lệ");
+            Console.WriteLine("Trạng thái thẻ sinh viên không hợp lệ. Vui lòng nhập lại!");
         }
         Console.Write("Ngày xem: ");
-        string ngayXem = Console.ReadLine().Trim().ToLower();
+        string ngayXem = Console.ReadLine().Trim().ToLower() ?? " ";
+        decimal giaGiam =0m;
+        string khuyenMai = "";
+        decimal phuThu=0m;
         decimal giaGoc = 100000m;
 
-        if(loaiKH == "Child" || loaiKH == "Trẻ em" || loaiKH == "Senior" || loaiKH == "Người cao tuổi")
+        if(loaiKH == "child" || loaiKH == "trẻ em" || loaiKH == "senior" || loaiKH == "người cao tuổi")
         {
-            giaGoc *= 0.5m;
+            khuyenMai = "50%";
+            giaGiam = giaGoc * 0.5m;
         }
-        else if((loaiKH == "Student" || loaiKH == "Sinh viên") && theSV == "True")
+        else if((loaiKH == "student" || loaiKH == "sinh viên") && theSV == "True" && ngayXem != "friday" && ngayXem != "thứ 6" && ngayXem != "saturday" && ngayXem != "thứ 7" && ngayXem != "sunday" && ngayXem != "chủ nhật" )
         {
-            
+            khuyenMai = "30%";
+            giaGiam = giaGoc * 0.3m;
         }
+        else if ((ngayXem == "Wednesday" || ngayXem == "Thứ 4") && loaiKH == "Người lớn" || loaiKH == "Adult")
+        {
+            khuyenMai = "20%";
+            giaGiam = giaGoc * 0.2m;
+        }
+
+        if (ngayXem == "friday" || ngayXem == "thứ 6" || 
+            ngayXem == "saturday" || ngayXem == "thứ 7" || 
+            ngayXem == "sunday" || ngayXem == "chủ nhật")
+        {
+            phuThu = 20000m;
+        }
+        decimal tongGia = giaGoc - giaGiam + phuThu;
+        Console.WriteLine("---OUTPUT---");
+        Console.WriteLine($"Giá vé gốc: {giaGoc:N0} VNĐ");
+        Console.WriteLine($"Giảm giá SV ({khuyenMai}%): -{giaGiam:N0} VNĐ");
+        Console.WriteLine($"Phụ thu cuối tuần:{phuThu:N0} VNĐ");
+        Console.WriteLine($"Tổng tiền vé: {tongGia:N0} VNĐ");
     }
     static void Main()
     {
-        Bai13();
+        Bai15();
     }
 }
 
