@@ -85,75 +85,66 @@ class Program
         Console.WriteLine($"Khuyên dùng: Cân nặng lý tưởng của bạn nên từ {canNangToiThieu:F2} kg đến {canNangToiDa:F2} kg");
     }
     //Ứng dụng quy đổi tiền tệ ngoại tệ đa tỷ giá ngân hàng
-   enum CurrencyType
-    {
-        
-        None,
-        USD,
-        EUR,
-        JPY,
-        GBP
+   static void Bai3()
+{
+    const decimal USD = 1m / 25400m;
+    const decimal EUR = 1m / 27200m;
+    const decimal JPY = 1m / 165m;
+    const decimal GBP = 1m / 32100m;
 
+    decimal VND = 0m;
+    int loaiNgoaiTe = 0;
+    Console.WriteLine("--- INPUT ---");
+
+    Console.Write("Nhập số tiền VNĐ: ");
+    if (!decimal.TryParse(Console.ReadLine(), out VND) || VND <= 0)
+    {
+        Console.WriteLine("Lỗi: Số tiền VNĐ nhập vào không hợp lệ!");
+        return;
     }
-       static void Bai3()
+
+    decimal phiDichVu = 0.005m * VND;
+    decimal tienVietNamSauPhi = VND - phiDichVu;
+    decimal tienNhanDuoc = 0m;
+    
+
+    string tenNgoaiTe = "";
+
+    Console.Write("Chọn ngoại tệ (1-USD, 2-EUR, 3-JPY, 4-GBP): ");
+    if (!int.TryParse(Console.ReadLine(), out loaiNgoaiTe))
     {
+        Console.WriteLine("Lỗi: Vui lòng nhập số từ 1 đến 4!");
+        return;
+    }
 
-        const decimal USD = 1m / 25400m;
-        const decimal EUR = 1m / 27200m;
-        const decimal JPY = 1m / 165m;
-        const decimal GBP = 1m / 32100m;
-
-        decimal VND = 0m;
-        int loaiNgoaiTe = 0;
-        Console.WriteLine("--- INTPUT ---");
-
-        Console.Write("Nhập số tiền VNĐ: ");
-        if (!decimal.TryParse(Console.ReadLine(), out VND) || VND <= 0)
-        {
-            Console.WriteLine("Lỗi: Số tiền VNĐ nhập vào không hợp lệ!");
+    switch (loaiNgoaiTe)
+    {
+        case 1:
+            tenNgoaiTe = "USD";
+            tienNhanDuoc = tienVietNamSauPhi * USD;
+            break;
+        case 2:
+            tenNgoaiTe = "EUR";
+            tienNhanDuoc = tienVietNamSauPhi * EUR;
+            break;
+        case 3:
+            tenNgoaiTe = "JPY";
+            tienNhanDuoc = tienVietNamSauPhi * JPY;
+            break;
+        case 4:
+            tenNgoaiTe = "GBP";
+            tienNhanDuoc = tienVietNamSauPhi * GBP;
+            break;
+        default:
+            Console.WriteLine("Lỗi: Lựa chọn ngoại tệ không phù hợp!");
             return;
-        }
+    }
 
-        decimal phiDichVu = 0.005m * VND;
-        decimal tienVietNamSauPhi = VND - phiDichVu;
-        decimal tienNhanDuoc = 0m;
-        CurrencyType myCurrency = CurrencyType.None;
-
-        Console.Write("Chọn ngoại tệ (1-USD, 2-EUR, 3-JPY, 4-GBP): ");
-        if (!int.TryParse(Console.ReadLine(), out loaiNgoaiTe))
-        {
-            Console.WriteLine("Lỗi: Vui lòng nhập số từ 1 đến 4!");
-            return;
-        }
-
-        switch (loaiNgoaiTe)
-        {
-            case 1:
-                myCurrency = CurrencyType.USD;
-                tienNhanDuoc = tienVietNamSauPhi * USD;
-                break;
-            case 2:
-                myCurrency = CurrencyType.EUR;
-                tienNhanDuoc = tienVietNamSauPhi * EUR;
-                break;
-            case 3:
-                myCurrency = CurrencyType.JPY;
-                tienNhanDuoc = tienVietNamSauPhi * JPY;
-                break;
-            case 4:
-                myCurrency = CurrencyType.GBP;
-                tienNhanDuoc = tienVietNamSauPhi * GBP;
-                break;
-            default:
-                Console.WriteLine("Lỗi: Lựa chọn ngoại tệ không phù hợp!");
-                return;
-        }
-
-        Console.WriteLine("--- OUTPUT ---");
-        Console.WriteLine($"Phí dịch vụ (0.5%): {phiDichVu:#,##0.00} VNĐ");
-        Console.WriteLine($"Số tiền VNĐ tính đổi: {tienVietNamSauPhi:#,##0.00} VNĐ");
-        Console.WriteLine($"Số tiền {myCurrency} nhận được: {tienNhanDuoc:#,##0.00} {myCurrency}");
-    }  
+    Console.WriteLine("--- OUTPUT ---");
+    Console.WriteLine($"Phí dịch vụ (0.5%): {phiDichVu:#,##0.00} VNĐ");
+    Console.WriteLine($"Số tiền VNĐ tính đổi: {tienVietNamSauPhi:#,##0.00} VNĐ");
+    Console.WriteLine($"Số tiền {tenNgoaiTe} nhận được: {tienNhanDuoc:#,##0.00} {tenNgoaiTe}");
+}
       
     //Tính Tuổi Chính Xác & Đếm Ngược Ngày Sinh Nhật
        static void Bai4()
@@ -494,7 +485,7 @@ class Program
             thueThuNhapCaNhan = 0;
         }
         decimal luongNet = luongGross - tong - thueThuNhapCaNhan;
-        Console.WriteLine("---OUTPUT");
+        Console.WriteLine("---OUTPUT---");
         Console.WriteLine($"Giảm trừ Bảo hiểm (10.5%): {tong:N0} VNĐ");
         Console.WriteLine($"Thu nhập chịu thuế: {thuNhapChiuThue:N0} VNĐ"); 
         Console.WriteLine($"Thuế TNCN phải nộp: {thueThuNhapCaNhan:N0} VNĐ");
@@ -502,13 +493,7 @@ class Program
 
     }
     //Quản Lý Tồn Kho & Xử Lý Giá Trị Khuyết Thiếu (Nullable Types)
-   enum StockStatus
-{
-    OutOfStock,
-    LowStock,
-    InStock,
-    Discontinued
-}
+  
     static void Bai10()
     {
         string productId = "KB-09";
@@ -517,37 +502,33 @@ class Program
         int minThreshold = 10;            
         DateTime? restockDate = null;    
 
-        
-        int displayQuantity = quantity ?? 0;
+    int displayQuantity = quantity ?? 0;
 
-        
-        StockStatus status;
-        if (quantity == null || quantity == 0)
-        {
-            status = StockStatus.OutOfStock;
-        }
-        else if (quantity < minThreshold)
-        {
-            status = StockStatus.LowStock;
-        }
-        else
-        {
-            status = StockStatus.InStock;
-        }
+    string status;
+    if (quantity == null || quantity == 0)
+    {
+        status = "OutOfStock";
+    }
+    else if (quantity < minThreshold)
+    {
+        status = "LowStock";
+    }
+    else
+    {
+        status = "InStock";
+    }
 
-        
-        string restockText = restockDate?.ToString("dd/MM/yyyy") ?? "Chưa có lịch nhập hàng";
+    string restockText = restockDate?.ToString("dd/MM/yyyy") ?? "Chưa có lịch nhập hàng";
 
-    
-        Console.WriteLine("---INPUT---");
-        Console.WriteLine($"Sản phẩm: {productName} (Mã: {productId})");
-        Console.WriteLine($"Số lượng tồn kho: {(quantity.HasValue ? quantity.Value.ToString() : "null (Chưa kiểm kê)")}");
-        Console.WriteLine($"Restock Date: {(restockDate.HasValue ? restockDate.Value.ToString("dd/MM/yyyy") : "null")}");
+    Console.WriteLine("--- INPUT ---");
+    Console.WriteLine($"Sản phẩm: {productName} (Mã: {productId})");
+    Console.WriteLine($"Số lượng tồn kho: {(quantity.HasValue ? quantity.Value.ToString() : "null (Chưa kiểm kê)")}");
+    Console.WriteLine($"Restock Date: {(restockDate.HasValue ? restockDate.Value.ToString("dd/MM/yyyy") : "null")}");
 
-        Console.WriteLine("--- OUTPUT ---");
-        Console.WriteLine($"Số lượng hiển thị: {displayQuantity} {(quantity == null ? "(Cảnh báo: Dữ liệu trống)" : "")}");
-        Console.WriteLine($"Trạng thái kho: {status} (Hết hàng)");
-        Console.WriteLine($"Dự kiến nhập hàng: {restockText}");
+    Console.WriteLine("\n--- OUTPUT ---");
+    Console.WriteLine($"Số lượng hiển thị: {displayQuantity} {(quantity == null ? "(Cảnh báo: Dữ liệu trống)" : "")}");
+    Console.WriteLine($"Trạng thái kho: {status} (Hết hàng)");
+    Console.WriteLine($"Dự kiến nhập hàng: {restockText}");
     }
     static void Bai11()
     {
@@ -590,14 +571,129 @@ class Program
         Console.WriteLine($"Tổng tiền lãi (lãi đơn): {laiDon:N0} VNĐ");
         Console.WriteLine($"Tổng tiền lãi (Lãi kép): {laiKep:N0} VNĐ");
         Console.WriteLine($"Lợi nhuận chênh lệch: {chenhLech:N0} VNĐ {toiUu}");
+    }
+    static void Bai12()
+    {
+    }
+    static void Bai13()
+    {
+        Console.WriteLine("--- INPUT ---");
+        Console.Write("Loại xe (Motorbike/Car/Truck): ");
+        string loaiXe = (Console.ReadLine() ?? "").Trim().ToLower();
 
+        
+        Console.Write("Giờ vào (yyyy-MM-dd HH:mm): ");
+        string inputVao = Console.ReadLine() ?? "";
+        DateTime thoiGianVao;
+        if (!DateTime.TryParseExact(inputVao, "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out thoiGianVao))
+        {
+            Console.WriteLine("Định dạng giờ vào không hợp lệ!");
+            return;
+        }
 
+        Console.Write("Giờ ra (yyyy-MM-dd HH:mm): ");
+        string inputRa = Console.ReadLine() ?? "";
+        DateTime thoiGianRa;
+        if (!DateTime.TryParseExact(inputRa, "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out thoiGianRa))
+        {
+            Console.WriteLine("Định dạng giờ ra không hợp lệ!");
+            return;
+        }
 
+        if (thoiGianRa < thoiGianVao)
+        {
+            Console.WriteLine("Thời gian ra phải sau thời gian vào!");
+            return;
+        }
 
+        TimeSpan thoiGianDo = thoiGianRa - thoiGianVao;
+        double actualHours = thoiGianDo.TotalHours;
+        int totalHours = (int)Math.Ceiling(actualHours);
+
+        decimal gia2GioDau = 0m;
+        decimal giaGioSau = 0m;
+
+        if (loaiXe == "motorbike" || loaiXe == "xe máy")
+        {
+            gia2GioDau = 5000m;
+            giaGioSau = 2000m;
+        }
+        else if (loaiXe == "car" || loaiXe == "ô tô")
+        {
+            gia2GioDau = 20000m;
+            giaGioSau = 10000m;
+        }
+        else if (loaiXe == "truck" || loaiXe == "xe tải")
+        {
+            gia2GioDau = 50000m;
+            giaGioSau = 25000m;
+        }
+        else
+        {
+            Console.WriteLine("Loại xe không hợp lệ! Vui lòng chỉ nhập Motorbike, Car hoặc Truck.");
+            return;
+        }
+
+        decimal phiHaiGioDau = gia2GioDau;
+        decimal phiGioSau = 0m;
+
+        if (totalHours > 2)
+        {
+            int soGioTiepTheo = totalHours - 2;
+            phiGioSau = soGioTiepTheo * giaGioSau;
+        }
+
+        decimal phuPhiThem = 0m;
+        if (thoiGianRa.Date > thoiGianVao.Date)
+        {
+            phuPhiThem = 30000m;
+        }
+
+        decimal tongPhi = phiHaiGioDau + phiGioSau + phuPhiThem;
+
+        Console.WriteLine("\n--- OUTPUT ---");
+        Console.WriteLine($"Tổng thời gian đỗ: {actualHours:F2} giờ -> Tính phí: {totalHours} giờ");
+        Console.WriteLine($"Phí 2 giờ đầu: {phiHaiGioDau:N0} VNĐ");
+        if (totalHours > 2)
+        {
+            Console.WriteLine($"Phí {totalHours - 2} giờ tiếp theo: {phiGioSau:N0} VNĐ ({giaGioSau:N0} x {totalHours - 2})");
+        }
+        if (phuPhiThem > 0)
+        {
+            Console.WriteLine($"Phụ phí qua đêm: {phuPhiThem:N0} VNĐ");
+        }
+        Console.WriteLine($"TỔNG PHÍ ĐỖ XE: {tongPhi:N0} VNĐ");
+    }
+    static void Bai15()
+    {
+        Console.Write("Khách hàng: ");
+        string loaiKH = Console.ReadLine().Trim().ToLower();
+        Console.Write("Thẻ SV hợp lệ: ");
+        string theSV = Console.ReadLine().Trim().ToLower();
+        while (true)
+        {
+            if(theSV == "true" || theSV == "false")
+            {
+                break;
+            }
+             Console.WriteLine("Trạng thái thể sinh viên không hợp lệ");
+        }
+        Console.Write("Ngày xem: ");
+        string ngayXem = Console.ReadLine().Trim().ToLower();
+        decimal giaGoc = 100000m;
+
+        if(loaiKH == "Child" || loaiKH == "Trẻ em" || loaiKH == "Senior" || loaiKH == "Người cao tuổi")
+        {
+            giaGoc *= 0.5m;
+        }
+        else if((loaiKH == "Student" || loaiKH == "Sinh viên") && theSV == "True")
+        {
+            
+        }
     }
     static void Main()
     {
-        Bai11();
+        Bai13();
     }
 }
 

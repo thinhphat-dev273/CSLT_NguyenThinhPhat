@@ -102,7 +102,7 @@ class Program
         {
             Console.WriteLine("Đây là tam giác cân");
         } 
-        else if (a==b && a == c && b == c)
+        else if (a==b && a == c)
         {
             Console.WriteLine("Đây là tam giác đều");
         } 
@@ -169,9 +169,9 @@ class Program
         Console.Write("Nhập n: ");
         n = int.Parse(Console.ReadLine());
         double sum = 0;
-        for(int i = 2; i <=n; i++)
+        for(int i = 1; i <=n; i++)
         {
-            sum += 1 + 1.0/i;
+            sum += 1.0/i;
         }
         Console.WriteLine($"Tổng 1 + 1/2 + 1/3 + 1/4 + 1/5 ... 1/{n} terms ={sum}");
     }
@@ -196,6 +196,9 @@ class Program
             if(tong == n)
             {
                 Console.WriteLine($"{n} là số hoàn hảo trong khoảng {a} và {b} ");
+            }  else
+            {
+                Console.WriteLine($"Không có số nào là số hhảo giữa {a} và {b}");
             }
         }
     }
@@ -210,28 +213,22 @@ class Program
                 break;
             } Console.WriteLine("Vui lòng nhập số lớn hơn 1");
         }
-    bool isPrime = true;
-
+        if (n < 2) 
+        {
+        Console.WriteLine($"{n} không phải là số nguyên tố.");
+        return; 
+        }
         for (int i = 2; i * i <= n; i++)
         {
-                if (n % i == 0)
+        if (n % i == 0)
             {
-                isPrime = false;
-                break;
+            Console.WriteLine($"{n} không phải là số nguyên tố.");
+            return; 
             }
         }
-
-        if (isPrime && n > 1)
-        {
-            Console.WriteLine($"{n} là số nguyên tố");
-        }
-         else
-        {
-            Console.WriteLine($"{n} không phải số nguyên tố");
-        }  
     }  
     static void Main()
     {
-        Bai9();
+        Bai10();
     }
 }
