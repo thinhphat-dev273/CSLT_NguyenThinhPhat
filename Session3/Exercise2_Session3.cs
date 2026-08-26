@@ -574,6 +574,52 @@ class Program
     }
     static void Bai12()
     {
+        Console.Write("Văn bản gốc: ");
+        string text = Console.ReadLine();
+
+        Console.Write("Khóa dịch chuyển (Shift Key k): ");
+        int k = int.Parse(Console.ReadLine());
+        char[] encryptedChars = new char[text.Length];
+        for (int i = 0; i < text.Length; i++)
+        {
+            char c = text[i];
+            if (c >= 'A' && c <= 'Z')
+            {
+                encryptedChars[i] = (char)('A' + (c - 'A' + k) % 26);
+            }
+            else if (c >= 'a' && c <= 'z')
+            {
+                encryptedChars[i] = (char)('a' + (c - 'a' + k) % 26);
+            }
+            else
+            {
+                encryptedChars[i] = c;
+            }
+        }
+        string encryptedText = new string(encryptedChars);
+
+        char[] decryptedChars = new char[encryptedText.Length];
+        for (int i = 0; i < encryptedText.Length; i++)
+        {
+            char c = encryptedText[i];
+            if (c >= 'A' && c <= 'Z')
+            {
+                decryptedChars[i] = (char)('A' + (c - 'A' - k + 26) % 26);
+            }
+            else if (c >= 'a' && c <= 'z')
+            {
+                decryptedChars[i] = (char)('a' + (c - 'a' - k + 26) % 26);
+            }
+            else
+            {
+                decryptedChars[i] = c;
+            }
+        }
+        string decryptedText = new string(decryptedChars);
+
+        Console.WriteLine("\n--- OUTPUT ---");
+        Console.WriteLine($"Văn bản Mã hóa: {encryptedText}");
+        Console.WriteLine($"Văn bản Giải mã: {decryptedText}");
     }
     static void Bai13()
     {
@@ -666,7 +712,6 @@ class Program
     }
     static void Bai14()
     {
-        
     }
     static void Bai15()
     {
@@ -722,7 +767,7 @@ class Program
     }
     static void Main()
     {
-        Bai15();
+        Bai12();
     }
 }
 
