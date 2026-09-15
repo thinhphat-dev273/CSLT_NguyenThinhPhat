@@ -138,8 +138,9 @@ class Exercises
         if (n % i == 0)
             {
             Console.WriteLine($"{n} không phải là số nguyên tố.");
-            return; 
+            break;
             }
+             Console.WriteLine($"{n} là số nguyên tố.");
         }
     }  
     static void Main()
