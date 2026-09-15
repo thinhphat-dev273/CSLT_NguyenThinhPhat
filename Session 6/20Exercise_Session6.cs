@@ -34,7 +34,7 @@ class Exercises
     if (string.IsNullOrEmpty(input)) return input;
 
     char[] charArray = input.ToCharArray();
-    Array.Reverse(charArray); // Đảo ngược trực tiếp trên mảng
+    Array.Reverse(charArray); 
     return new string(charArray);
     }
     public static void Main(String[] args)
@@ -58,6 +58,7 @@ class Exercises
         {
             Console.WriteLine($"{n} là số lẻ");
         }
+
         Console.WriteLine("---Bài 3---");
         Console.Write("Nhập số nguyên a: ");
         int a1 = int.Parse(Console.ReadLine() ?? "0");
