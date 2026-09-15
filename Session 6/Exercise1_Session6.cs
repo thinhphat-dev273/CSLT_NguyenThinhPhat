@@ -71,6 +71,7 @@ class Exercises
 
     public static bool IsPerfectNumber(int n4)
     {
+        if (n4 <= 1) return false;
         int sum = 0;
         for(int i = 1; i< n4; i++)
         {
@@ -94,12 +95,13 @@ class Exercises
     }
     public static void Main(string[] args)
     {
-        Console.WriteLine("---Bài 1---");
+       Console.WriteLine("---Bài 1---");
         Console.WriteLine("Nhập vào các số nguyên: ");
-        int a = int.Parse(Console.ReadLine() ?? " ");
-        int b = int.Parse(Console.ReadLine() ?? " ");
-        int c = int.Parse(Console.ReadLine() ?? " ");
-        int soLonNhat = FindMax(a,b,c);
+        // Sửa " " thành "0" để tránh crash chương trình khi nhập rỗng
+        int a = int.Parse(Console.ReadLine() ?? "0");
+        int b = int.Parse(Console.ReadLine() ?? "0");
+        int c = int.Parse(Console.ReadLine() ?? "0");
+        int soLonNhat = FindMax(a, b, c);
         Console.WriteLine($"Số lớn nhất trong ba số là: {soLonNhat}");
 
         // Console.WriteLine("---Bài 1b---");
