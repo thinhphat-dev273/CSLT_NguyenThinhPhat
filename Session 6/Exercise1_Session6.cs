@@ -95,64 +95,63 @@ class Exercises
     }
     public static void Main(string[] args)
     {
-       Console.WriteLine("---Bài 1---");
+        Console.WriteLine("---Bài 1---");
         Console.WriteLine("Nhập vào các số nguyên: ");
-        // Sửa " " thành "0" để tránh crash chương trình khi nhập rỗng
         int a = int.Parse(Console.ReadLine() ?? "0");
         int b = int.Parse(Console.ReadLine() ?? "0");
         int c = int.Parse(Console.ReadLine() ?? "0");
         int soLonNhat = FindMax(a, b, c);
         Console.WriteLine($"Số lớn nhất trong ba số là: {soLonNhat}");
 
-        // Console.WriteLine("---Bài 1b---");
-        // int max = FindMaxImproved(34, 5,6,7,7,5,433,67,89);
-        // Console.WriteLine($"Số lớn nhất trong dãy số là: {max}");
+        Console.WriteLine("---Bài 1b---");
+        int max = FindMaxImproved(34, 5,6,7,7,5,433,67,89);
+        Console.WriteLine($"Số lớn nhất trong dãy số là: {max}");
 
 
-        // Console.WriteLine("---Bài 2---");
-        // Console.WriteLine("Nhập vào số nguyên dương n: ");
-        // int n = int.Parse(Console.ReadLine() ?? " " );
-        // long giaiThua = Factorial(n);
-        // Console.WriteLine($"Giai thừa của {n} là:  {giaiThua}");
+        Console.WriteLine("---Bài 2---");
+        Console.WriteLine("Nhập vào số nguyên dương n: ");
+        int n = int.Parse(Console.ReadLine() ?? " " );
+        long giaiThua = Factorial(n);
+        Console.WriteLine($"Giai thừa của {n} là:  {giaiThua}");
 
-        // Console.WriteLine("---Bài 3---");
-        // Console.WriteLine("Nhập vào số nguyên dương n: ");
-        // int n1 = int.Parse(Console.ReadLine() ?? " ");
-        // bool nguyenTo = IsPrime(n1);
-        // if (nguyenTo)
-        // {
-        //     Console.WriteLine($"{n1} là số nguyên tố");
-        // }
-        // else
-        // {
-        //     Console.WriteLine($"{n1} không phải là số nguyên tố");
-        // } 
+        Console.WriteLine("---Bài 3---");
+        Console.WriteLine("Nhập vào số nguyên dương n: ");
+        int n1 = int.Parse(Console.ReadLine() ?? " ");
+        bool nguyenTo = IsPrime(n1);
+        if (nguyenTo)
+        {
+            Console.WriteLine($"{n1} là số nguyên tố");
+        }
+        else
+        {
+            Console.WriteLine($"{n1} không phải là số nguyên tố");
+        } 
 
-        // Console.WriteLine("---Bài 4.1---");
-        // Console.WriteLine("Nhập một số nguyên dương n: ");
-        // int n2 = int.Parse(Console.ReadLine() ?? " ");
-        // Console.WriteLine($"Các số nguyên tố nhỏ hơn {n2} là: ");
-        // PrintPrimeLessThan(n2);
+        Console.WriteLine("---Bài 4.1---");
+        Console.WriteLine("Nhập một số nguyên dương n: ");
+        int n2 = int.Parse(Console.ReadLine() ?? " ");
+        Console.WriteLine($"Các số nguyên tố nhỏ hơn {n2} là: ");
+        PrintPrimeLessThan(n2);
 
-        // Console.WriteLine("---Bài 4.2---");
-        // Console.WriteLine("Nhập số nguyên dương n: ");
-        // int n3 = int.Parse(Console.ReadLine() ?? " ");
-        // Console.WriteLine($"{n3} số nguyên tố đầu tiên là: ");
-        // PrintFirstNPrime(n3);
+        Console.WriteLine("---Bài 4.2---");
+        Console.WriteLine("Nhập số nguyên dương n: ");
+        int n3 = int.Parse(Console.ReadLine() ?? " ");
+        Console.WriteLine($"{n3} số nguyên tố đầu tiên là: ");
+        PrintFirstNPrime(n3);
 
-        // Console.WriteLine("---Bài 5---");
-        // Console.WriteLine("Nhập vào số nguyên dương n: ");
-        // int n4 = int.Parse(Console.ReadLine() ?? " ");
-        // bool soHoanHao = IsPerfectNumber(n4);
-        // if (soHoanHao)
-        // {
-        //     Console.WriteLine($"{n4} là số hoàn hảo");       
-        // }
-        // else
-        // {
-        //     Console.WriteLine($"{n4} không phải là số hoàn hảo");
-        // }
-        // Console.WriteLine("Các số hoàn hảo dưới 1000 là: ");
-        // PrintAllPerfectNumerLessThan1000();
+        Console.WriteLine("---Bài 5---");
+        Console.WriteLine("Nhập vào số nguyên dương n: ");
+        int n4 = int.Parse(Console.ReadLine() ?? " ");
+        bool soHoanHao = IsPerfectNumber(n4);
+        if (soHoanHao)
+        {
+            Console.WriteLine($"{n4} là số hoàn hảo");       
+        }
+        else
+        {
+            Console.WriteLine($"{n4} không phải là số hoàn hảo");
+        }
+        Console.WriteLine("Các số hoàn hảo dưới 1000 là: ");
+        PrintAllPerfectNumerLessThan1000();
     }
 }
