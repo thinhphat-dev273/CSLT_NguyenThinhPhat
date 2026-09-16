@@ -78,9 +78,35 @@ class Exercises
             Console.Write($"{fibo} , ");
         }
     }
+    //Bài 8
+    public static int DemNguyenAm(string s)
+    {
+        if(string.IsNullOrEmpty(s)) return 0;
+        char [] mangKyTu = s.ToCharArray();
+        int dem = 0;
+        foreach(char vowel in mangKyTu)
+        {
+            if(vowel == 'a' || vowel == 'e' || vowel == 'i' || vowel == 'o' || vowel == 'u' ||
+               vowel == 'A' || vowel == 'E' || vowel == 'I' || vowel == 'O' || vowel == 'U')
+            {
+                dem++;
+            }
+        }
+        return dem;
+    }
+    public static double TinhLuyThua(double x, int y)
+    {
+        if(y==0) return 1;
+        double result = 1;
+        for(int i = 1; i <= y; i++)
+        {
+            result *= x;
+        }
+        return result;
+    }
     public static void Main(String[] args)
     {
-        // Console.WriteLine("---Bài 1---");
+        // Console.WriteLine("\n---Bài 1---");
         // Console.Write("Nhập vào số nguyên a: ");
         // int a = int.Parse(Console.ReadLine() ?? "0");
         // Console.Write("Nhập vào số nguyên b: ");
@@ -88,7 +114,7 @@ class Exercises
         // int tong = TinhTong(a,b);
         // Console.WriteLine($"Tổng của {a} và {b} là: {tong}");
 
-        // Console.WriteLine("---Bài 2---");
+        // Console.WriteLine("\n---Bài 2---");
         // Console.Write("Nhập vào số nguyên n: ");
         // int n = int.Parse(Console.ReadLine() ?? "0");
         // if (ChanLe(n))
@@ -100,7 +126,7 @@ class Exercises
         //     Console.WriteLine($"{n} là số lẻ");
         // }
 
-        // Console.WriteLine("---Bài 3---");
+        // Console.WriteLine("\n---Bài 3---");
         // Console.Write("Nhập số nguyên a: ");
         // int a1 = int.Parse(Console.ReadLine() ?? "0");
         // Console.Write("Nhập số nguyên b: ");
@@ -110,18 +136,18 @@ class Exercises
         // int max = TimSoLonNhat(a1, b1, c1);
         // Console.WriteLine($"Số lớn nhất trong 3 số {a1}, {b1}, {c1} là: {max}");
 
-        // Console.WriteLine("---Bài 4---");
+        // Console.WriteLine("\n---Bài 4---");
         // Console.Write("Nhập một số nguyên dương n: ");
         // int n = int.Parse(Console.ReadLine() ?? "0");
         // long tinhGiaiThua = GiaiThua(n);
         // Console.WriteLine($"Giai thừa của {n} là: {tinhGiaiThua}");
 
-        // Console.WriteLine("---Bài 5---");
+        // Console.WriteLine("\n---Bài 5---");
         // Console.Write("Nhập một chuỗi: ");
         // string input = Console.ReadLine() ?? "0";
         // Console.WriteLine($"Chuỗi sau khi đảo ngược là:{DaoNguocChuoi(input)} ");
 
-        // Console.WriteLine("---Bài 6---");
+        // Console.WriteLine("\n---Bài 6---");
         // Console.Write("Nhập một số nguyên dương n: ");  
         // int n1 = int.Parse(Console.ReadLine() ?? "0");
         // if (SoNguyenTo(n1))
@@ -133,10 +159,24 @@ class Exercises
         //     Console.WriteLine($"{n1} không phải là số nguyên tố");
         // }
 
-        Console.WriteLine("---Bài 7---");
-        Console.Write("Nhập một số nguyên dương n: ");
-        int n2 = int.Parse(Console.ReadLine() ?? "0");
-        Console.Write($"{n2} số fibonacci đầu tiên là: ");
-        Fibonacci(n2);
+        // Console.WriteLine("\n---Bài 7---");
+        // Console.Write("Nhập một số nguyên dương n: ");
+        // int n2 = int.Parse(Console.ReadLine() ?? "0");
+        // Console.Write($"{n2} số fibonacci đầu tiên là: ");
+        // Fibonacci(n2);
+
+        // Console.WriteLine("\n---Bài 8---");
+        // Console.Write("Nhập một chuỗi vào để kiểm tra: ");
+        // string s = Console.ReadLine() ?? "0";
+        // int demNguyenAm = DemNguyenAm(s);
+        // Console.WriteLine($"Số nguyên âm trong chuỗi \"{s}\" là: {demNguyenAm}");
+
+        Console.WriteLine("\n---Bài 9---");
+        Console.Write("Nhập vào cơ số x: ");
+        double x = double.Parse(Console.ReadLine() ?? "0");
+        Console.Write("Nhập vào số mũ y: ");
+        int y = int.Parse(Console.ReadLine() ?? "0");
+        double luyThua = TinhLuyThua(x,y);
+        Console.WriteLine($"{x} ^ {y} = {luyThua}");
     }
 }
