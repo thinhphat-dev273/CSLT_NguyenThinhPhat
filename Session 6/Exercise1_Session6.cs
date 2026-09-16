@@ -116,7 +116,7 @@ class Exercises
 
         Console.WriteLine("---Bài 3---");
         Console.WriteLine("Nhập vào số nguyên dương n: ");
-        int n1 = int.Parse(Console.ReadLine() ?? " ");
+        int n1 = int.Parse(Console.ReadLine() ?? "0");
         bool nguyenTo = IsPrime(n1);
         if (nguyenTo)
         {

@@ -40,8 +40,7 @@ class Exercises
     //Bài 6
     public static bool SoNguyenTo(int n1)
     {
-        if(n1<1) return false;
-        if(n1==1) return true;
+        if(n1<=1) return false;
         for(int i =2; i< n1/2; i++)
         {
             if(n1 % i == 0) return false;
@@ -63,7 +62,7 @@ class Exercises
         }
         if(n2 == 1)
         {
-            Console.WriteLine("1"); 
+            Console.WriteLine("0"); 
             return;
         }
         long a = 0;
@@ -82,18 +81,19 @@ class Exercises
     public static int DemNguyenAm(string s)
     {
         if(string.IsNullOrEmpty(s)) return 0;
-        char [] mangKyTu = s.ToCharArray();
+        string s1 = s.ToLower();
+        char [] mangKyTu = s1.ToCharArray();
         int dem = 0;
         foreach(char vowel in mangKyTu)
         {
-            if(vowel == 'a' || vowel == 'e' || vowel == 'i' || vowel == 'o' || vowel == 'u' ||
-               vowel == 'A' || vowel == 'E' || vowel == 'I' || vowel == 'O' || vowel == 'U')
+            if(vowel == 'a' || vowel == 'e' || vowel == 'i' || vowel == 'o' || vowel == 'u')
             {
                 dem++;
             }
         }
         return dem;
     }
+    //Bài 9
     public static double TinhLuyThua(double x, int y)
     {
         if(y==0) return 1;
@@ -103,6 +103,60 @@ class Exercises
             result *= x;
         }
         return result;
+    }
+    //Bài 10
+    public static double TinhTrungBinh(int [] arr)
+    {
+        double sum = 0;
+        foreach(double val in arr)
+        {
+            sum+=val;
+        }
+        return sum / arr.Length;
+    }
+    //Bài 11
+    public static bool KiemTraDoiXung(string s)
+    {
+        if(string.IsNullOrEmpty(s)) return false;
+        string s1 = s.ToLower();
+        char [] chuoiNguoc = s1.ToCharArray();
+        Array.Reverse(chuoiNguoc);
+        string s2 = new string(chuoiNguoc);
+        if (s2 == s1)
+        {
+            return true;
+        }
+        return false;
+    }
+    //Bài 12
+    public static double CeliusToFahrenheit(double c)
+    {
+        return (c*1.8) + 32;
+    }
+    //Bài 13
+    public static int TimMin(int [] arr)
+    {
+        int min = arr[0];
+        foreach(int val in arr)
+        {
+           if(val < min)
+            {
+                min = val;
+            } 
+        }
+        return min;;
+    }
+    public static int TongCacChuSo(int n3)
+    {
+        int soDuong = Math.Abs(n3); 
+        int sum = 0;
+        while (soDuong > 0)
+        {
+            sum += soDuong % 10; 
+            soDuong /= 10;      
+        }
+    
+    return sum;
     }
     public static void Main(String[] args)
     {
@@ -171,12 +225,63 @@ class Exercises
         // int demNguyenAm = DemNguyenAm(s);
         // Console.WriteLine($"Số nguyên âm trong chuỗi \"{s}\" là: {demNguyenAm}");
 
-        Console.WriteLine("\n---Bài 9---");
-        Console.Write("Nhập vào cơ số x: ");
-        double x = double.Parse(Console.ReadLine() ?? "0");
-        Console.Write("Nhập vào số mũ y: ");
-        int y = int.Parse(Console.ReadLine() ?? "0");
-        double luyThua = TinhLuyThua(x,y);
-        Console.WriteLine($"{x} ^ {y} = {luyThua}");
+        // Console.WriteLine("\n---Bài 9---");
+        // Console.Write("Nhập vào cơ số x: ");
+        // double x = double.Parse(Console.ReadLine() ?? "0");
+        // Console.Write("Nhập vào số mũ y: ");
+        // int y = int.Parse(Console.ReadLine() ?? "0");
+        // double luyThua = TinhLuyThua(x,y);
+        // Console.WriteLine($"{x} ^ {y} = {luyThua}");
+
+        // Console.WriteLine("---Bài 10---");
+        // Console.Write("Nhập số lượng phần tử của mảng: ");
+        // int soLuong = int.Parse(Console.ReadLine() ?? "0");
+
+        // int [] mang = new int[soLuong];
+        // for(int i = 0; i < soLuong; i++)
+        // {
+        //     Console.Write($"arr[{i}]: ");
+        //     mang[i] = int.Parse(Console.ReadLine());
+        // }
+        // double trungBinh = TinhTrungBinh(mang);
+        // Console.WriteLine($"Trung bình của mảng là: {trungBinh}");
+
+        // Console.WriteLine("---Bài 11---");
+        // Console.Write("Nhập vào một chuỗi để kiểm tra: ");
+        // string s = Console.ReadLine() ?? "0";
+        // if (KiemTraDoiXung(s))
+        // {
+        //     Console.WriteLine($"Chuỗi \"{s}\" đọc xuôi ngược giống nhau");
+        // }
+        // else
+        // {
+        //     Console.WriteLine($"Chuỗi \"{s}\" đọc xuôi ngược không giống nhau");
+        // }
+
+        // Console.WriteLine("---Bài 12---");
+        // Console.Write("Nhập vào số độ C: ");
+        // double c = double.Parse(Console.ReadLine() ?? "0");
+        // double f = CeliusToFahrenheit(c);
+        // Console.WriteLine($"{c} độ C = {f} độ F");
+
+        // Console.WriteLine("---Bài 13---");
+        // Console.Write("Nhập số phần tử của mảng: ");
+        // int phanTu = int.Parse(Console.ReadLine() ?? "0");
+
+        // int [] mang1 = new int[phanTu];
+        // for(int i = 0; i < phanTu; i++)
+        // {
+        //     Console.Write($"arr[{i}] = ");
+        //     mang1[i] = int.Parse(Console.ReadLine() ?? "0");
+        // }
+        // int min = TimMin(mang1);
+        // Console.WriteLine($"Giá trị nhỏ nhất trong mảng là: {min}");
+
+        Console.WriteLine("---Bài 14---");
+        Console.Write("Nhập và một số n: ");
+        int n3 = int.Parse(Console.ReadLine() ?? "0");
+
+        int tong = TongCacChuSo(n3);
+        Console.WriteLine($"Tổng từng chữ số tạo nên n là: {tong} ");
     }
 }
