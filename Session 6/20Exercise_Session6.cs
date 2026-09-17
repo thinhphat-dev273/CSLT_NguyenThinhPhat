@@ -177,6 +177,64 @@ class Exercises
         }
         Console.WriteLine(string.Join(", ", arr));
     }
+    //Bài 16
+    public static string XoaTrungLap(string s)
+    {
+        if(string.IsNullOrEmpty(s)) return s;
+        string ketQua = "";
+        foreach(char c in s)
+        {
+            if (!ketQua.Contains(c))
+            {
+               ketQua+=c; 
+            }
+        }
+        return ketQua;
+    }
+    //Bài 17
+    public static int UCLN(int a2, int b2)
+    {
+        int c = Math.Max(a2,b2);
+        int d = Math.Min(a2,b2);
+        int r;
+        do{
+            r = c % d;
+            c = d;
+            d = r;
+        }
+        while(r != 0);
+        return c;
+    }
+    //Bài 18
+    public static string DecimalToBinary(int n4)
+    {
+        if(n4 == 0) return "0";
+        string ketQua = "";
+        while(n4 > 0)
+        {
+            int r = n4 % 2;
+            ketQua = r + ketQua;
+            n4 = n4 / 2;
+        }
+        return ketQua;
+    }
+    //Bài 19
+    public static bool KiemTraNamNhuan(int year)
+    {
+        if((year % 4 == 0 && year % 100 != 0) || year % 400 == 0)
+        {
+            return true;
+        }
+        return false;
+    }
+    //Bài 20
+    public static int DemSoTu(string sentence)
+    {
+        if(string.IsNullOrEmpty(sentence)) return 0;
+        string [] demTu = sentence.Split(' ');
+        return demTu.Length;
+    }
+
     public static void Main(String[] args)
     {
         // Console.WriteLine("\n---Bài 1---");
@@ -303,17 +361,60 @@ class Exercises
         // int tong = TongCacChuSo(n3);
         // Console.WriteLine($"Tổng từng chữ số tạo nên n là: {tong} ");
 
-        Console.WriteLine("---Bài 15---");
-        Console.Write("Nhập số phần tử của mảng: ");
-        int soLuongMangSapXep = int.Parse(Console.ReadLine() ?? "0");
+        // Console.WriteLine("---Bài 15---");
+        // Console.Write("Nhập số phần tử của mảng: ");
+        // int soLuongMangSapXep = int.Parse(Console.ReadLine() ?? "0");
 
-        int [] mangSapXep = new int[soLuongMangSapXep];
-        for(int i = 0; i < soLuongMangSapXep; i++)
-        {
-            Console.Write($"arr[{i}] = ");
-            mangSapXep[i] = int.Parse(Console.ReadLine() ?? "0");
-        }
-        Console.Write("Mảng sau khi sắp xếp là: ");
-        SapXepMang(mangSapXep);
+        // int [] mangSapXep = new int[soLuongMangSapXep];
+        // for(int i = 0; i < soLuongMangSapXep; i++)
+        // {
+        //     Console.Write($"arr[{i}] = ");
+        //     mangSapXep[i] = int.Parse(Console.ReadLine() ?? "0");
+        // }
+        // Console.Write("Mảng sau khi sắp xếp là: ");
+        // SapXepMang(mangSapXep);
+
+        // Console.WriteLine("---Bài 16---");
+        // Console.Write("Nhập vào một chuỗi: ");
+        // string s = Console.ReadLine();
+
+        // string xoaTrungLap = XoaTrungLap(s);
+        // Console.WriteLine($"Chuỗi \"{s}\" sau khi xoá ký tự trùng lặp: {xoaTrungLap}");
+
+        // Console.WriteLine("---Bài 17---");
+        // Console.Write("Nhập vào số a: ");
+        // int a2 = int.Parse(Console.ReadLine() ?? "0");
+        // Console.Write("Nhập vào số b: ");
+        // int b2 = int.Parse(Console.ReadLine() ?? "0");
+
+        // int uocChungLonNhat = UCLN(a2,b2);
+        // Console.WriteLine($"Ước chung lớn nhất của {a2} và {b2} là: {uocChungLonNhat}");
+
+        // Console.WriteLine("---Bài 18---");
+        // Console.Write("Nhập vào số thập phân hệ 10: ");
+        // int n4 = int.Parse(Console.ReadLine() ?? "0");
+
+        // string nhiPhan = DecimalToBinary(n4);
+        // Console.WriteLine($"Số {n4} đổi sang hệ nhị phân là: {nhiPhan}");
+
+        // Console.WriteLine("---Bài 19---");
+        // Console.Write("Nhập vào số năm muốn kiểm tra: ");
+        // int year = int.Parse(Console.ReadLine() ?? "0");
+
+        // if (KiemTraNamNhuan(year))
+        // {
+        //     Console.WriteLine($"Năm {year} là năm nhuận");
+        // }
+        // else
+        // {
+        //     Console.WriteLine($"Năm {year} không phải là năm nhuận");
+        // }
+
+        Console.WriteLine("---Bài 20---");
+        Console.Write("Nhập vào một chuỗi: ");
+        string sentence = Console.ReadLine() ?? "0";
+
+        int soTuCuaCau = DemSoTu(sentence);
+        Console.WriteLine($"Câu trên có tổng cộng: {soTuCuaCau} từ");
     }
 }
