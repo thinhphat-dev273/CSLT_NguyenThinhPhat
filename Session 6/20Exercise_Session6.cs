@@ -146,6 +146,7 @@ class Exercises
         }
         return min;;
     }
+    //Bài 14
     public static int TongCacChuSo(int n3)
     {
         int soDuong = Math.Abs(n3); 
@@ -157,6 +158,24 @@ class Exercises
         }
     
     return sum;
+    }
+
+    //Bài 15
+    public static void SapXepMang(int[] arr)
+    {
+        for(int i = 0; i < arr.Length - 1; i++)
+        {
+            for(int j = 0; j < arr.Length - i - 1; j++)
+            {
+                if(arr[j] > arr[j + 1])
+                {
+                    int temp = arr[j];
+                    arr[j] = arr[j+1];
+                    arr[j+1] = temp;
+                }
+            }
+        }
+        Console.WriteLine(string.Join(", ", arr));
     }
     public static void Main(String[] args)
     {
@@ -277,11 +296,24 @@ class Exercises
         // int min = TimMin(mang1);
         // Console.WriteLine($"Giá trị nhỏ nhất trong mảng là: {min}");
 
-        Console.WriteLine("---Bài 14---");
-        Console.Write("Nhập và một số n: ");
-        int n3 = int.Parse(Console.ReadLine() ?? "0");
+        // Console.WriteLine("---Bài 14---");
+        // Console.Write("Nhập và một số n: ");
+        // int n3 = int.Parse(Console.ReadLine() ?? "0");
 
-        int tong = TongCacChuSo(n3);
-        Console.WriteLine($"Tổng từng chữ số tạo nên n là: {tong} ");
+        // int tong = TongCacChuSo(n3);
+        // Console.WriteLine($"Tổng từng chữ số tạo nên n là: {tong} ");
+
+        Console.WriteLine("---Bài 15---");
+        Console.Write("Nhập số phần tử của mảng: ");
+        int soLuongMangSapXep = int.Parse(Console.ReadLine() ?? "0");
+
+        int [] mangSapXep = new int[soLuongMangSapXep];
+        for(int i = 0; i < soLuongMangSapXep; i++)
+        {
+            Console.Write($"arr[{i}] = ");
+            mangSapXep[i] = int.Parse(Console.ReadLine() ?? "0");
+        }
+        Console.Write("Mảng sau khi sắp xếp là: ");
+        SapXepMang(mangSapXep);
     }
 }
