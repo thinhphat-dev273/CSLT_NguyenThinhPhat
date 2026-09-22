@@ -31,11 +31,10 @@ class Exercises
     //bài 5
     public static string DaoNguocChuoi(string input)
     {
-    if (string.IsNullOrEmpty(input)) return input;
-
-    char[] charArray = input.ToCharArray();
-    Array.Reverse(charArray); 
-    return new string(charArray);
+    if(string.IsNullOrEmpty(input)) return "0";
+    char [] reverse = input.ToCharArray();
+    Array.Reverse(reverse);
+    return new string(reverse);
     }
     //Bài 6
     public static bool SoNguyenTo(int n1)
@@ -50,31 +49,31 @@ class Exercises
     //Bài 7
     public static void Fibonacci(int n2)
     {
-        if(n2 < 0)
-        {
-            Console.WriteLine("Số truyền vào phải là số nguyên dương");
-            return;
-        } 
         if(n2 == 0)
         {
-            Console.WriteLine("0"); 
+            Console.WriteLine("0");
             return;
         }
-        if(n2 == 1)
+        else if(n2 == 1)
         {
-            Console.WriteLine("0"); 
+            Console.WriteLine("0");
+            return;
+        }
+        else if(n2 < 0)
+        {
+            Console.WriteLine("Nhập vào số nguyên dương");
             return;
         }
         long a = 0;
         long b = 1;
-        long fibo = 0;
+        long fibo;
         Console.Write("0, 1, ");
         for(int i = 2; i < n2; i++)
         {
             fibo = a + b;
             a = b;
             b = fibo;
-            Console.Write($"{fibo} , ");
+            Console.Write($"{fibo}, ");
         }
     }
     //Bài 8
@@ -100,7 +99,7 @@ class Exercises
         double result = 1;
         for(int i = 1; i <= y; i++)
         {
-            result *= x;
+            result*=x;
         }
         return result;
     }
@@ -119,14 +118,17 @@ class Exercises
     {
         if(string.IsNullOrEmpty(s)) return false;
         string s1 = s.ToLower();
-        char [] chuoiNguoc = s1.ToCharArray();
-        Array.Reverse(chuoiNguoc);
-        string s2 = new string(chuoiNguoc);
-        if (s2 == s1)
+        char [] daonguoc = s1.ToCharArray();
+        Array.Reverse(daonguoc);
+        string s2 = new string(daonguoc);
+        if(s2 == s1)
         {
             return true;
         }
-        return false;
+        else
+        {
+            return false;
+        }
     }
     //Bài 12
     public static double CeliusToFahrenheit(double c)
@@ -149,44 +151,46 @@ class Exercises
     //Bài 14
     public static int TongCacChuSo(int n3)
     {
-        int soDuong = Math.Abs(n3); 
+        int soDuong = Math.Abs(n3);
         int sum = 0;
-        while (soDuong > 0)
+        int r;
+        while(n3 > 0)
         {
-            sum += soDuong % 10; 
-            soDuong /= 10;      
+            r = n3 % 10;
+            sum+= r;
+            n3 = n3 / 10;
         }
-    
-    return sum;
+        return sum;
     }
 
     //Bài 15
     public static void SapXepMang(int[] arr)
     {
-        for(int i = 0; i < arr.Length - 1; i++)
+        for(int i = 0; i < arr.Length - 1 ; i++)
         {
             for(int j = 0; j < arr.Length - i - 1; j++)
             {
-                if(arr[j] > arr[j + 1])
+                if(arr[j] > arr[j+1])
                 {
-                    int temp = arr[j];
-                    arr[j] = arr[j+1];
-                    arr[j+1] = temp;
+                int temp = arr[j];
+                arr[j] = arr[j+1];
+                arr[j+1] = temp;
                 }
             }
         }
-        Console.WriteLine(string.Join(", ", arr));
+        Console.Write(string.Join(", ", arr));
     }
     //Bài 16
     public static string XoaTrungLap(string s)
     {
-        if(string.IsNullOrEmpty(s)) return s;
+        if(string.IsNullOrEmpty(s)) return "0";
+        string s1 = s.ToLower();
         string ketQua = "";
-        foreach(char c in s)
+        foreach(char c in s1)
         {
             if (!ketQua.Contains(c))
             {
-               ketQua+=c; 
+                ketQua+=c;
             }
         }
         return ketQua;
@@ -208,11 +212,12 @@ class Exercises
     //Bài 18
     public static string DecimalToBinary(int n4)
     {
-        if(n4 == 0) return "0";
-        string ketQua = "";
-        while(n4 > 0)
+       if(n4 == 0) return "0";
+       int r;
+       string ketQua = "";
+       while(n4 > 0)
         {
-            int r = n4 % 2;
+            r = n4 % 2;
             ketQua = r + ketQua;
             n4 = n4 / 2;
         }
@@ -376,7 +381,7 @@ class Exercises
 
         // Console.WriteLine("---Bài 16---");
         // Console.Write("Nhập vào một chuỗi: ");
-        // string s = Console.ReadLine();
+        // string s = Console.ReadLine() ?? " 0";
 
         // string xoaTrungLap = XoaTrungLap(s);
         // Console.WriteLine($"Chuỗi \"{s}\" sau khi xoá ký tự trùng lặp: {xoaTrungLap}");
@@ -390,12 +395,12 @@ class Exercises
         // int uocChungLonNhat = UCLN(a2,b2);
         // Console.WriteLine($"Ước chung lớn nhất của {a2} và {b2} là: {uocChungLonNhat}");
 
-        // Console.WriteLine("---Bài 18---");
-        // Console.Write("Nhập vào số thập phân hệ 10: ");
-        // int n4 = int.Parse(Console.ReadLine() ?? "0");
+        Console.WriteLine("---Bài 18---");
+        Console.Write("Nhập vào số thập phân hệ 10: ");
+        int n4 = int.Parse(Console.ReadLine() ?? "0");
 
-        // string nhiPhan = DecimalToBinary(n4);
-        // Console.WriteLine($"Số {n4} đổi sang hệ nhị phân là: {nhiPhan}");
+        string nhiPhan = DecimalToBinary(n4);
+        Console.WriteLine($"Số {n4} đổi sang hệ nhị phân là: {nhiPhan}");
 
         // Console.WriteLine("---Bài 19---");
         // Console.Write("Nhập vào số năm muốn kiểm tra: ");
@@ -410,11 +415,11 @@ class Exercises
         //     Console.WriteLine($"Năm {year} không phải là năm nhuận");
         // }
 
-        Console.WriteLine("---Bài 20---");
-        Console.Write("Nhập vào một chuỗi: ");
-        string sentence = Console.ReadLine() ?? "0";
+        // Console.WriteLine("---Bài 20---");
+        // Console.Write("Nhập vào một chuỗi: ");
+        // string sentence = Console.ReadLine() ?? "0";
 
-        int soTuCuaCau = DemSoTu(sentence);
-        Console.WriteLine($"Câu trên có tổng cộng: {soTuCuaCau} từ");
+        // int soTuCuaCau = DemSoTu(sentence);
+        // Console.WriteLine($"Câu trên có tổng cộng: {soTuCuaCau} từ");
     }
 }
