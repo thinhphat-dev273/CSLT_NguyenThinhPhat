@@ -32,9 +32,13 @@ class Exercises
     public static string DaoNguocChuoi(string input)
     {
     if(string.IsNullOrEmpty(input)) return "0";
+    string ketQua = "";
     char [] reverse = input.ToCharArray();
-    Array.Reverse(reverse);
-    return new string(reverse);
+    for(int i = reverse.Length - 1; i >= 0; i--)
+        {
+            ketQua += reverse[i];
+        }
+        return ketQua;
     }
     //Bài 6
     public static bool SoNguyenTo(int n1)
@@ -278,10 +282,10 @@ class Exercises
         // long tinhGiaiThua = GiaiThua(n);
         // Console.WriteLine($"Giai thừa của {n} là: {tinhGiaiThua}");
 
-        // Console.WriteLine("\n---Bài 5---");
-        // Console.Write("Nhập một chuỗi: ");
-        // string input = Console.ReadLine() ?? "0";
-        // Console.WriteLine($"Chuỗi sau khi đảo ngược là:{DaoNguocChuoi(input)} ");
+        Console.WriteLine("\n---Bài 5---");
+        Console.Write("Nhập một chuỗi: ");
+        string input = Console.ReadLine() ?? "0";
+        Console.WriteLine($"Chuỗi sau khi đảo ngược là:{DaoNguocChuoi(input)} ");
 
         // Console.WriteLine("\n---Bài 6---");
         // Console.Write("Nhập một số nguyên dương n: ");  
