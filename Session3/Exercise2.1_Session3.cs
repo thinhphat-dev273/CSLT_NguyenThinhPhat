@@ -1,9 +1,14 @@
 using System;
+using System.Globalization;
+using System.Text;
 
 namespace BaiTapCS
 {
-    //Bài 1
-    public static (decimal TienChuaThue, decimal ThueVat, decimal TongThanhToan) TinhTienDien(decimal soKwh)
+    class Program
+    {
+
+        // Bài 1
+        public static (decimal TienChuaThue, decimal ThueVat, decimal TongThanhToan) TinhTienDien(decimal soKwh)
         {
             if (soKwh < 0) return (0, 0, 0);
 
@@ -24,8 +29,9 @@ namespace BaiTapCS
 
             return (tienChuaThue, thueVat, tongThanhToan);
         }
-    //Bài 2
-    public static (double Bmi, string PhanLoai, double CanNangMin, double CanNangMax) TinhBMI(double chieuCao, double canNang)
+
+        // Bài 2
+        public static (double Bmi, string PhanLoai, double CanNangMin, double CanNangMax) TinhBMI(double chieuCao, double canNang)
         {
             double bmi = canNang / Math.Pow(chieuCao, 2);
             string phanLoai;
@@ -40,8 +46,9 @@ namespace BaiTapCS
 
             return (bmi, phanLoai, canNangMin, canNangMax);
         }
-    //Bài 3
-    public static decimal TinhPhiDichVu(decimal vnd)
+
+        // Bài 3
+        public static decimal TinhPhiDichVu(decimal vnd)
         {
             return vnd * 0.005m;
         }
@@ -70,9 +77,8 @@ namespace BaiTapCS
                 default: return "Không xác định";
             }
         }
-    //Bài 4
-    public class Bai04_TinhTuoiSinhNhat
-    {
+
+        // Bài 4
         public static int TinhTuoi(DateTime ngaySinh, DateTime hienTai)
         {
             int tuoi = hienTai.Year - ngaySinh.Year;
@@ -99,7 +105,8 @@ namespace BaiTapCS
             TimeSpan khoangThoiGian = sinhNhatTiepTheo - hienTai;
             return (int)khoangThoiGian.TotalDays;
         }
-    //Bài 5
+
+        // Bài 5
         public static double TinhDiemTrungBinh(double csharp, double toan, double tiengAnh)
         {
             return (csharp * 4 + toan * 3 + tiengAnh * 2) / 9.0;
@@ -131,8 +138,9 @@ namespace BaiTapCS
             if (dtb >= 4.0) return "Yếu";
             return "Kém (Trượt)";
         }
-    //Bài 6
-    public static string ChuanHoa(string tenTho)
+
+        // Bài 6
+        public static string ChuanHoa(string tenTho)
         {
             string[] tu = tenTho.Trim().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
             for (int i = 0; i < tu.Length; i++)
@@ -143,7 +151,6 @@ namespace BaiTapCS
             return string.Join(" ", tu);
         }
 
-        // Bỏ dấu tiếng Việt
         public static string LoaiBoDau(string text)
         {
             string textThuong = text.ToLower();
@@ -160,12 +167,12 @@ namespace BaiTapCS
             return textThuong;
         }
 
-        // Tạo Username từ tên chuẩn hóa
         public static string TaoUsername(string hoTenChuan)
         {
             string khongDau = LoaiBoDau(hoTenChuan);
             string[] dsTu = khongDau.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
             
+            if (dsTu.Length == 0) return "";
             string ten = dsTu[dsTu.Length - 1];
             if (dsTu.Length == 1) return ten;
 
@@ -176,8 +183,9 @@ namespace BaiTapCS
             }
             return ten + "." + hoVaDem;
         }
-    //Bài 7
-    public static double TinhTongLitXang(double khoangCach, double nhienLieu)
+
+        // Bài 7
+        public static double TinhTongLitXang(double khoangCach, double nhienLieu)
         {
             return (khoangCach / 100.0) * nhienLieu;
         }
@@ -189,18 +197,18 @@ namespace BaiTapCS
 
         public static decimal TinhChiPhiMoiNguoi(decimal tongChiPhi, int soNguoi)
         {
+            if (soNguoi <= 0) soNguoi = 1;
             return Math.Ceiling(tongChiPhi / soNguoi);
         }
-    //Bài 8
-    public static string KiemTraXacThuc(string inputOTP, string systemOTP, int secondPassed)
+
+        // Bài 8
+        public static string KiemTraXacThuc(string inputOTP, string systemOTP, int secondPassed)
         {
-            // Kiểm tra định dạng 6 chữ số
             if (inputOTP.Length != 6 || !ulong.TryParse(inputOTP, out _))
             {
                 return "Trạng thái xác thực: LỖI - Định dạng không hợp lệ (phải chứa đúng 6 chữ số).";
             }
 
-            // Kiểm tra thời gian
             if (secondPassed > 300)
             {
                 int phut = secondPassed / 60;
@@ -208,7 +216,6 @@ namespace BaiTapCS
                 return "Trạng thái xác thực: LỖI - Hết hạn OTP (Đã trôi qua " + phut + " phút " + giay + " giây).";
             }
 
-            // Kiểm tra mã
             if (inputOTP != systemOTP)
             {
                 return "Trạng thái xác thực: LỖI - Mã sai.";
@@ -216,8 +223,9 @@ namespace BaiTapCS
 
             return "Trạng thái xác thực: THÀNH CÔNG - Giao dịch đã được phê duyệt.";
         }
-    //Bài 9
-    public static decimal TinhBaoHiem(decimal luongGross)
+
+        // Bài 9
+        public static decimal TinhBaoHiem(decimal luongGross)
         {
             return 0.105m * luongGross;
         }
@@ -248,19 +256,22 @@ namespace BaiTapCS
             {
                 return (0.05m * 5000000m) + (0.1m * 5000000m) + (0.15m * (thuNhapChiuThue - 10000000m));
             }
-
-            return 0m;
+            else
+            {
+                // Bổ sung các bậc thuế cao hơn
+                return (0.05m * 5000000m) + (0.1m * 5000000m) + (0.15m * 8000000m) + (0.20m * (thuNhapChiuThue - 18000000m));
+            }
         }
 
         public static decimal TinhLuongNet(decimal luongGross, decimal baoHiem, decimal thueTncn)
         {
             return luongGross - baoHiem - thueTncn;
         }
-    //Bài 10
-    public static int LaySoLuongHienThi(int? quantity)
+
+        // Bài 10
+        public static int LaySoLuongHienThi(int? quantity)
         {
-            if (quantity == null) return 0;
-            return quantity.Value;
+            return quantity ?? 0;
         }
 
         public static string TinhTrangThai(int? quantity, int minThreshold)
@@ -287,10 +298,12 @@ namespace BaiTapCS
             }
             return restockDate.Value.ToString("dd/MM/yyyy");
         }
-    //Bài 11
-    public static decimal TinhLaiDon(decimal tienGui, double laiSuatNam, int kyHanThang)
+
+        // Bài 11
+        public static decimal TinhLaiDon(decimal tienGui, double laiSuatNam, int kyHanThang)
         {
-            return tienGui * ((decimal)laiSuatNam / 100m) * (kyHanThang / 12m);
+            // Sửa lỗi ép kiểu phép chia decimal
+            return tienGui * ((decimal)laiSuatNam / 100m) * ((decimal)kyHanThang / 12m);
         }
 
         public static decimal TinhLaiKep(decimal tienGui, double laiSuatNam, int kyHanThang)
@@ -302,35 +315,24 @@ namespace BaiTapCS
 
         public static string SoSanhLoiNhuan(decimal laiDon, decimal laiKep)
         {
-            if (laiDon > laiKep)
-            {
-                return "(Lãi đơn tối ưu hơn)";
-            }
-            else if (laiKep > laiDon)
-            {
-                return "(Lãi kép tối ưu hơn)";
-            }
+            if (laiDon > laiKep) return "(Lãi đơn tối ưu hơn)";
+            if (laiKep > laiDon) return "(Lãi kép tối ưu hơn)";
             return "(Không lãi suất nào tối ưu hơn)";
         }
-    //Bài 12
-    public static string MaHoa(string text, int k)
+
+        // Bài 12
+        public static string MaHoa(string text, int k)
         {
             char[] result = new char[text.Length];
             for (int i = 0; i < text.Length; i++)
             {
                 char c = text[i];
                 if (c >= 'A' && c <= 'Z')
-                {
                     result[i] = (char)('A' + (c - 'A' + k) % 26);
-                }
                 else if (c >= 'a' && c <= 'z')
-                {
                     result[i] = (char)('a' + (c - 'a' + k) % 26);
-                }
                 else
-                {
                     result[i] = c;
-                }
             }
             return new string(result);
         }
@@ -342,22 +344,17 @@ namespace BaiTapCS
             {
                 char c = encryptedText[i];
                 if (c >= 'A' && c <= 'Z')
-                {
                     result[i] = (char)('A' + (c - 'A' - k + 26) % 26);
-                }
                 else if (c >= 'a' && c <= 'z')
-                {
                     result[i] = (char)('a' + (c - 'a' - k + 26) % 26);
-                }
                 else
-                {
                     result[i] = c;
-                }
             }
             return new string(result);
         }
-    //Bài 13
-    public static decimal TinhPhi2GioDau(string loaiXe)
+
+        // Bài 13
+        public static decimal TinhPhi2GioDau(string loaiXe)
         {
             string xe = loaiXe.Trim().ToLower();
             if (xe == "motorbike" || xe == "xe máy") return 5000m;
@@ -383,8 +380,9 @@ namespace BaiTapCS
             }
             return 0m;
         }
-    //Bài 14
-    public static decimal TinhGiaGiam(string loaiKH, bool coTheSV, string ngayXem, decimal giaGoc)
+
+        // Bài 15 (Giá vé xem phim)
+        public static decimal TinhGiaGiam(string loaiKH, bool coTheSV, string ngayXem, decimal giaGoc)
         {
             string kh = loaiKH.Trim().ToLower();
             string ngay = ngayXem.Trim().ToLower();
@@ -421,31 +419,27 @@ namespace BaiTapCS
             return 0m;
         }
 
-    static void Main(string[] args)
+        static void Main(string[] args)
         {
             Console.OutputEncoding = Encoding.UTF8;
             Console.InputEncoding = Encoding.UTF8;
 
-            ChayBai1();
-            ChayBai2();
+            // ChayBai1();
+            // ChayBai2();
             ChayBai3();
-            ChayBai4();
-            ChayBai5();
-            ChayBai6();
-            ChayBai7();
-            ChayBai8();
-            ChayBai9();
-            ChayBai10();
-            ChayBai11();
-            ChayBai12();
-            ChayBai13();
-            ChayBai15();
-
+            // ChayBai4();
+            // ChayBai5();
+            // ChayBai6();
+            // ChayBai7();
+            // ChayBai8();
+            // ChayBai9();
+            // ChayBai10();
+            // ChayBai11();
+            // ChayBai12();
+            // ChayBai13();
+            // ChayBai15();
         }
 
-        // ----------------------------------------------------
-        // BÀI 1: TÍNH TIỀN ĐIỆN
-        // ----------------------------------------------------
         static void ChayBai1()
         {
             Console.WriteLine("--- BÀI 1: TÍNH TIỀN ĐIỆN SINH HOẠT ---");
@@ -462,9 +456,7 @@ namespace BaiTapCS
             }
 
             decimal soKwh = chiSoMoi - chiSoCu;
-            decimal tienChuaThue = Bai01_TinhTienDien.TinhTienChuaThue(soKwh);
-            decimal thueVat = Bai01_TinhTienDien.TinhThueVat(tienChuaThue);
-            decimal tongThanhToan = tienChuaThue + thueVat;
+            var (tienChuaThue, thueVat, tongThanhToan) = TinhTienDien(soKwh);
 
             Console.WriteLine("--- OUTPUT ---");
             Console.WriteLine($"Số điện tiêu thụ: {soKwh} kWh");
@@ -473,9 +465,6 @@ namespace BaiTapCS
             Console.WriteLine($"Tổng thanh toán: {tongThanhToan:#,##0} VNĐ\n");
         }
 
-        // ----------------------------------------------------
-        // BÀI 2: TÍNH BMI
-        // ----------------------------------------------------
         static void ChayBai2()
         {
             Console.WriteLine("--- BÀI 2: HỆ THỐNG THEO DÕI CHỈ SỐ BMI ---");
@@ -485,10 +474,7 @@ namespace BaiTapCS
             Console.Write("Cân nặng (kg): ");
             double canNang = double.Parse(Console.ReadLine() ?? "0");
 
-            double bmi = Bai02_TinhBMI.TinhBmi(chieuCao, canNang);
-            string phanLoai = Bai02_TinhBMI.DanhGiaSuckhoe(bmi);
-            double canMin = Bai02_TinhBMI.TinhCanNangToiThieu(chieuCao);
-            double canMax = Bai02_TinhBMI.TinhCanNangToiDa(chieuCao);
+            var (bmi, phanLoai, canMin, canMax) = TinhBMI(chieuCao, canNang);
 
             Console.WriteLine("--- OUTPUT ---");
             Console.WriteLine($"Chỉ số BMI của bạn: {bmi:F2}");
@@ -496,9 +482,6 @@ namespace BaiTapCS
             Console.WriteLine($"Khuyên dùng: Cân nặng lý tưởng từ {canMin:F2} kg đến {canMax:F2} kg\n");
         }
 
-        // ----------------------------------------------------
-        // BÀI 3: QUY ĐỔI NGOẠI TỆ
-        // ----------------------------------------------------
         static void ChayBai3()
         {
             Console.WriteLine("--- BÀI 3: ỨNG DỤNG QUY ĐỔI NGOẠI TỆ ---");
@@ -514,10 +497,10 @@ namespace BaiTapCS
             Console.Write("Chọn ngoại tệ (1-USD, 2-EUR, 3-JPY, 4-GBP): ");
             int loaiNgoaiTe = int.Parse(Console.ReadLine() ?? "0");
 
-            decimal phiDichVu = Bai03_QuyDoiNgoaiTe.TinhPhiDichVu(vnd);
+            decimal phiDichVu = TinhPhiDichVu(vnd);
             decimal tienSauPhi = vnd - phiDichVu;
-            decimal tienNhanDuoc = Bai03_QuyDoiNgoaiTe.TinhTienQuyDoi(tienSauPhi, loaiNgoaiTe);
-            string tenNgoaiTe = Bai03_QuyDoiNgoaiTe.LayTenNgoaiTe(loaiNgoaiTe);
+            decimal tienNhanDuoc = TinhTienQuyDoi(tienSauPhi, loaiNgoaiTe);
+            string tenNgoaiTe = LayTenNgoaiTe(loaiNgoaiTe);
 
             Console.WriteLine("--- OUTPUT ---");
             Console.WriteLine($"Phí dịch vụ (0.5%): {phiDichVu:#,##0.00} VNĐ");
@@ -525,9 +508,6 @@ namespace BaiTapCS
             Console.WriteLine($"Số tiền {tenNgoaiTe} nhận được: {tienNhanDuoc:#,##0.00} {tenNgoaiTe}\n");
         }
 
-        // ----------------------------------------------------
-        // BÀI 4: TÍNH TUỔI & ĐẾM NGƯỢC SINH NHẬT
-        // ----------------------------------------------------
         static void ChayBai4()
         {
             Console.WriteLine("--- BÀI 4: TÍNH TUỔI & ĐẾM NGƯỢC SINH NHẬT ---");
@@ -548,9 +528,9 @@ namespace BaiTapCS
             }
 
             DateTime hienTai = DateTime.Now;
-            int tuoi = Bai04_TinhTuoiSinhNhat.TinhTuoi(ngaySinh, hienTai);
-            int soNgayDaSong = Bai04_TinhTuoiSinhNhat.TinhSoNgayDaSong(ngaySinh, hienTai);
-            int soNgayDenSinhNhat = Bai04_TinhTuoiSinhNhat.TinhSoNgayConLaiDenSinhNhat(ngaySinh, hienTai);
+            int tuoi = TinhTuoi(ngaySinh, hienTai);
+            int soNgayDaSong = TinhSoNgayDaSong(ngaySinh, hienTai);
+            int soNgayDenSinhNhat = TinhSoNgayConLaiDenSinhNhat(ngaySinh, hienTai);
 
             Console.WriteLine("--- OUTPUT ---");
             Console.WriteLine($"Tuổi hiện tại: {tuoi}");
@@ -558,9 +538,6 @@ namespace BaiTapCS
             Console.WriteLine($"Sinh nhật tiếp theo còn: {soNgayDenSinhNhat} ngày\n");
         }
 
-        // ----------------------------------------------------
-        // BÀI 5: QUẢN LÝ ĐIỂM HỌC PHẦN (GPA)
-        // ----------------------------------------------------
         static void ChayBai5()
         {
             Console.WriteLine("--- BÀI 5: QUẢN LÝ ĐIỂM HỌC PHẦN & GPA ---");
@@ -573,10 +550,10 @@ namespace BaiTapCS
             Console.Write("Điểm Tiếng Anh (2 TC): ");
             double tiengAnh = double.Parse(Console.ReadLine() ?? "0");
 
-            double dtb = Bai05_QuanLyGpa.TinhDiemTrungBinh(csharp, toan, tiengAnh);
-            string diemChu = Bai05_QuanLyGpa.QuyDoiDiemChu(dtb);
-            double gpa = Bai05_QuanLyGpa.QuyDoiGpa(dtb);
-            string hocLuc = Bai05_QuanLyGpa.XepLoaiHocLuc(dtb);
+            double dtb = TinhDiemTrungBinh(csharp, toan, tiengAnh);
+            string diemChu = QuyDoiDiemChu(dtb);
+            double gpa = QuyDoiGpa(dtb);
+            string hocLuc = XepLoaiHocLuc(dtb);
 
             Console.WriteLine("--- OUTPUT ---");
             Console.WriteLine($"Điểm TB thang 10: {dtb:F2}");
@@ -585,9 +562,6 @@ namespace BaiTapCS
             Console.WriteLine($"Xếp loại học lực: {hocLuc}\n");
         }
 
-        // ----------------------------------------------------
-        // BÀI 6: CHUẨN HÓA HỌ TÊN & TẠO USERNAME
-        // ----------------------------------------------------
         static void ChayBai6()
         {
             Console.WriteLine("--- BÀI 6: CHUẨN HÓA HỌ TÊN & TỰ ĐỘNG TẠO USERNAME ---");
@@ -600,13 +574,14 @@ namespace BaiTapCS
                 return;
             }
 
-            string hoTenChuan = Bai06_ChuanHoaHoTen.ChuanHoa(tenTho);
-            string username = Bai06_ChuanHoaHoTen.TaoUsername(hoTenChuan);
+            string hoTenChuan = ChuanHoa(tenTho);
+            string username = TaoUsername(hoTenChuan);
 
             string[] tu = hoTenChuan.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
             string ho = tu[0];
             string ten = tu[tu.Length - 1];
             string tenDem = "";
+
             if (tu.Length > 2)
             {
                 string[] mangDem = new string[tu.Length - 2];
@@ -621,9 +596,6 @@ namespace BaiTapCS
             Console.WriteLine($"Email cấp phát: {username}@company.edu.vn\n");
         }
 
-        // ----------------------------------------------------
-        // BÀI 7: CHI PHÍ NHIÊN LIỆU (CAR-POOLING)
-        // ----------------------------------------------------
         static void ChayBai7()
         {
             Console.WriteLine("--- BÀI 7: CHI PHÍ NHIÊN LIỆU & CAR-POOLING ---");
@@ -639,9 +611,9 @@ namespace BaiTapCS
             Console.Write("Số người đi: ");
             int soNguoi = int.Parse(Console.ReadLine() ?? "1");
 
-            double tongLit = Bai07_ChiPhiNhienLieu.TinhTongLitXang(khoangCach, nhienLieu);
-            decimal tongChiPhi = Bai07_ChiPhiNhienLieu.TinhTongChiPhi(tongLit, giaXang);
-            decimal moiNguoi = Bai07_ChiPhiNhienLieu.TinhChiPhiMoiNguoi(tongChiPhi, soNguoi);
+            double tongLit = TinhTongLitXang(khoangCach, nhienLieu);
+            decimal tongChiPhi = TinhTongChiPhi(tongLit, giaXang);
+            decimal moiNguoi = TinhChiPhiMoiNguoi(tongChiPhi, soNguoi);
 
             Console.WriteLine("--- OUTPUT ---");
             Console.WriteLine($"Tổng nhiên liệu tiêu thụ: {tongLit:N2} lít");
@@ -649,9 +621,6 @@ namespace BaiTapCS
             Console.WriteLine($"Chi phí mỗi người: {moiNguoi:N0} VND\n");
         }
 
-        // ----------------------------------------------------
-        // BÀI 8: XÁC THỰC OTP
-        // ----------------------------------------------------
         static void ChayBai8()
         {
             Console.WriteLine("--- BÀI 8: HỆ THỐNG XÁC THỰC MÃ OTP ---");
@@ -663,15 +632,12 @@ namespace BaiTapCS
             Console.Write("Thời gian trôi qua (giây): ");
             int secondPassed = int.Parse(Console.ReadLine() ?? "0");
 
-            string ketQua = Bai08_XacThucOtp.KiemTraXacThuc(inputOTP, systemOTP, secondPassed);
+            string ketQua = KiemTraXacThuc(inputOTP, systemOTP, secondPassed);
 
             Console.WriteLine("--- OUTPUT ---");
             Console.WriteLine(ketQua + "\n");
         }
 
-        // ----------------------------------------------------
-        // BÀI 9: TÍNH LƯƠNG GROSS - NET
-        // ----------------------------------------------------
         static void ChayBai9()
         {
             Console.WriteLine("--- BÀI 9: TÍNH LƯƠNG GROSS - NET ---");
@@ -681,10 +647,10 @@ namespace BaiTapCS
             Console.Write("Số người phụ thuộc: ");
             int soNguoiPhuThuoc = int.Parse(Console.ReadLine() ?? "0");
 
-            decimal baoHiem = Bai09_TinhLuongGrossNet.TinhBaoHiem(luongGross);
-            decimal thuNhapChiuThue = Bai09_TinhLuongGrossNet.TinhThuNhapChiuThue(luongGross, baoHiem, soNguoiPhuThuoc);
-            decimal thueTncn = Bai09_TinhLuongGrossNet.TinhThueTncn(thuNhapChiuThue);
-            decimal luongNet = Bai09_TinhLuongGrossNet.TinhLuongNet(luongGross, baoHiem, thueTncn);
+            decimal baoHiem = TinhBaoHiem(luongGross);
+            decimal thuNhapChiuThue = TinhThuNhapChiuThue(luongGross, baoHiem, soNguoiPhuThuoc);
+            decimal thueTncn = TinhThueTncn(thuNhapChiuThue);
+            decimal luongNet = TinhLuongNet(luongGross, baoHiem, thueTncn);
 
             Console.WriteLine("--- OUTPUT ---");
             Console.WriteLine($"Giảm trừ Bảo hiểm (10.5%): {baoHiem:N0} VNĐ");
@@ -693,9 +659,6 @@ namespace BaiTapCS
             Console.WriteLine($"Lương NET thực nhận: {luongNet:N0} VNĐ\n");
         }
 
-        // ----------------------------------------------------
-        // BÀI 10: QUẢN LÝ TỒN KHO (NULLABLE TYPES)
-        // ----------------------------------------------------
         static void ChayBai10()
         {
             Console.WriteLine("--- BÀI 10: QUẢN LÝ TỒN KHO ---");
@@ -705,9 +668,9 @@ namespace BaiTapCS
             int minThreshold = 10;
             DateTime? restockDate = null;
 
-            int displayQuantity = Bai10_QuanLyTonKho.LaySoLuongHienThi(quantity);
-            string status = Bai10_QuanLyTonKho.TinhTrangThai(quantity, minThreshold);
-            string restockText = Bai10_QuanLyTonKho.LayNgayRestock(restockDate);
+            int displayQuantity = LaySoLuongHienThi(quantity);
+            string status = TinhTrangThai(quantity, minThreshold);
+            string restockText = LayNgayRestock(restockDate);
 
             Console.WriteLine($"Sản phẩm: {productName} (Mã: {productId})");
             Console.WriteLine($"Số lượng tồn kho gốc: {(quantity.HasValue ? quantity.Value.ToString() : "null (Chưa kiểm kê)")}");
@@ -719,9 +682,6 @@ namespace BaiTapCS
             Console.WriteLine($"Dự kiến nhập hàng: {restockText}\n");
         }
 
-        // ----------------------------------------------------
-        // BÀI 11: TÍNH LÃI SUẤT NGÂN HÀNG
-        // ----------------------------------------------------
         static void ChayBai11()
         {
             Console.WriteLine("--- BÀI 11: TÍNH LÃI SUẤT NGÂN HÀNG ---");
@@ -734,9 +694,9 @@ namespace BaiTapCS
             Console.Write("Thời gian gửi (tháng): ");
             int kyHan = int.Parse(Console.ReadLine() ?? "0");
 
-            decimal laiDon = Bai11_TinhLaiSuat.TinhLaiDon(tienGui, laiSuat, kyHan);
-            decimal laiKep = Bai11_TinhLaiSuat.TinhLaiKep(tienGui, laiSuat, kyHan);
-            string toiUu = Bai11_TinhLaiSuat.SoSanhLoiNhuan(laiDon, laiKep);
+            decimal laiDon = TinhLaiDon(tienGui, laiSuat, kyHan);
+            decimal laiKep = TinhLaiKep(tienGui, laiSuat, kyHan);
+            string toiUu = SoSanhLoiNhuan(laiDon, laiKep);
             decimal chenhLech = Math.Abs(laiDon - laiKep);
 
             Console.WriteLine("--- OUTPUT ---");
@@ -745,9 +705,6 @@ namespace BaiTapCS
             Console.WriteLine($"Lợi nhuận chênh lệch: {chenhLech:N0} VNĐ {toiUu}\n");
         }
 
-        // ----------------------------------------------------
-        // BÀI 12: MÃ HÓA CAESAR
-        // ----------------------------------------------------
         static void ChayBai12()
         {
             Console.WriteLine("--- BÀI 12: MÃ HÓA CAESAR ---");
@@ -757,17 +714,14 @@ namespace BaiTapCS
             Console.Write("Khóa dịch chuyển k: ");
             int k = int.Parse(Console.ReadLine() ?? "0");
 
-            string encrypted = Bai12_MaHoaCaesar.MaHoa(text, k);
-            string decrypted = Bai12_MaHoaCaesar.GiaiMa(encrypted, k);
+            string encrypted = MaHoa(text, k);
+            string decrypted = GiaiMa(encrypted, k);
 
             Console.WriteLine("--- OUTPUT ---");
             Console.WriteLine($"Văn bản Mã hóa: {encrypted}");
             Console.WriteLine($"Văn bản Giải mã: {decrypted}\n");
         }
 
-        // ----------------------------------------------------
-        // BÀI 13: TÍNH PHÍ ĐỖ XE
-        // ----------------------------------------------------
         static void ChayBai13()
         {
             Console.WriteLine("--- BÀI 13: TÍNH PHÍ ĐỖ XE ---");
@@ -789,10 +743,10 @@ namespace BaiTapCS
             double actualHours = (gioRa - gioVao).TotalHours;
             int totalHours = (int)Math.Ceiling(actualHours);
 
-            decimal phi2GioDau = Bai13_TinhPhiDoXe.TinhPhi2GioDau(loaiXe);
-            decimal giaGioSau = Bai13_TinhPhiDoXe.TinhPhiGioSau(loaiXe);
+            decimal phi2GioDau = TinhPhi2GioDau(loaiXe);
+            decimal giaGioSau = TinhPhiGioSau(loaiXe);
             decimal phiGioSau = totalHours > 2 ? (totalHours - 2) * giaGioSau : 0m;
-            decimal phuPhi = Bai13_TinhPhiDoXe.TinhPhuPhiQuaDem(gioVao, gioRa);
+            decimal phuPhi = TinhPhuPhiQuaDem(gioVao, gioRa);
             decimal tongPhi = phi2GioDau + phiGioSau + phuPhi;
 
             Console.WriteLine("--- OUTPUT ---");
@@ -809,9 +763,6 @@ namespace BaiTapCS
             Console.WriteLine($"TỔNG PHÍ ĐỖ XE: {tongPhi:N0} VNĐ\n");
         }
 
-        // ----------------------------------------------------
-        // BÀI 15: TÍNH GIÁ VÉ XEM PHIM
-        // ----------------------------------------------------
         static void ChayBai15()
         {
             Console.WriteLine("--- BÀI 15: TÍNH GIÁ VÉ XEM PHIM ---");
@@ -819,14 +770,14 @@ namespace BaiTapCS
             string loaiKH = Console.ReadLine() ?? "";
 
             Console.Write("Có thẻ SV hợp lệ không (true/false): ");
-            bool coTheSV = bool.Parse(Console.ReadLine() ?? "false");
+            bool.TryParse(Console.ReadLine(), out bool coTheSV);
 
             Console.Write("Ngày xem (Monday.../Thứ 2...): ");
             string ngayXem = Console.ReadLine() ?? "";
 
             decimal giaGoc = 100000m;
-            decimal giaGiam = Bai15_GiaVeXemPhim.TinhGiaGiam(loaiKH, coTheSV, ngayXem, giaGoc);
-            decimal phuThu = Bai15_GiaVeXemPhim.TinhPhuThu(ngayXem);
+            decimal giaGiam = TinhGiaGiam(loaiKH, coTheSV, ngayXem, giaGoc);
+            decimal phuThu = TinhPhuThu(ngayXem);
             decimal tongTien = giaGoc - giaGiam + phuThu;
 
             Console.WriteLine("--- OUTPUT ---");
