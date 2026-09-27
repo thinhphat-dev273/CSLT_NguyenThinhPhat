@@ -143,7 +143,7 @@ class Program
         int a;
         Console.Write("Nhập vào một số nguyên: ");
         a = int.Parse(Console.ReadLine());
-        int product = 0;
+        int product;
 
         for(int i = 1; i <=10; i++)
         {
